@@ -20,7 +20,7 @@ export default function App() {
 	}
 	const getTodos = async () => {
         try {
-            const todosData = await getTodosApi();
+			const todosData = await getTodosApi();
             setTodos(todosData);
         } catch (err) {
             console.log(err)
@@ -110,7 +110,7 @@ export default function App() {
 			<Header />
 			<View style={styles.content}>
 				<AddTodo submitHandler={submitHandler}/>
-				<View style={{flex:1}}>
+				<View>
 					<FlatList
 						data={todos}
 						keyExtractor={item => item._id}
