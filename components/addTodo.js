@@ -18,7 +18,6 @@ export default function AddTodo({submitHandler}) {
             <View style={{flex:1}}>
                 <Button
                     style={styles.btn}
-                    
                     onPress={() => submitHandler(text)}
                 title='ADD'
             />

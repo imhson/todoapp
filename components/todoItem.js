@@ -1,24 +1,43 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Button} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
+import { Feather } from '@expo/vector-icons'
 
-export default function TodoItem({ item, pressHandler, deleteHandler }) {
+const checkStatus = (status) => {
+    if (status === "success") return true;
+    return false;
+}
+
+export default function TodoItem({ item, updateHandler, deleteHandler,editHandler }) {
     return (
         <View>
         <TouchableOpacity  style ={styles.item}>
                 <Text
                     style={{
-                    textDecorationLine: item.complete ? 'line-through' : 'none',
-                    flex:5
+                    textDecorationLine: checkStatus(item.status) ? 'line-through' : 'none',
+                        flex: 6,
+                    
                 }}
-                    onPress={() => pressHandler(item.key)}
+                    onPress={() => updateHandler(item.content,!checkStatus(item.status),item._id)}
                     >
-                    {item.text}</Text>
-                    <Button
-                    style={{ flex: 1 }}
-                    color='red'
-                    onPress ={()=>deleteHandler(item.key,item.text)}
-                    title='Delete'
+                    {item.content}</Text>
+                <TouchableOpacity
+                style={{marginRight:7}}>
+                    <Feather
+                        onPress={() => editHandler(item.content,checkStatus(item.status),item._id)}
+                        name='edit'
+                        color='green'
+                        
                     />
+
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => deleteHandler(item._id)}>
+                    <Feather
+                    name='trash'
+                    color='red'
+                    
+                    /></TouchableOpacity>
+            
             </TouchableOpacity>
             </View>
     )
